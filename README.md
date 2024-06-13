@@ -21,9 +21,9 @@
 
 ### Com o docker instalado nós vamos executar o comando abaixo para criar a network
 
-`docker network create --subnet=172.20.0.0/16 soft-test`
+`docker network create --subnet=172.18.0.0/16 soft-test`
 
-`docker compose up -d --build`
+`docker compose up -d`
 
 ### Feito isso basta abrir o browser e navegar no projeto
 
