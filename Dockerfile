@@ -22,8 +22,6 @@ RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 # Habilita módulos do Apache
 RUN a2enmod rewrite headers ssl proxy proxy_http env
 
-# RUN evasive
-
 # Cria diretório para sessões PHP
 RUN mkdir -p /var/php-session \
     && chmod -Rf 777 /var/php-session
@@ -34,10 +32,6 @@ RUN addgroup --gid 1024 docker-apache || true \
 
 # Instala o Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
-
-# Instala o Node.js
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get -y install nodejs
 
 # Configura o fuso horário
 ENV TZ 'America/Sao_Paulo'
