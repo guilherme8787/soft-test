@@ -10,6 +10,18 @@
 
 > Ubuntu 22.04 jammy
 
+### Rodando sem o docker
+
+> Execute o arquivo ./initdb/init.sql em algum SGBD e banco de sua preferencia, lembre se mudar o `\c postgres` para o nome de seu banco.
+
+> Se preferir pode importar o arquivo exportado via adminer chamado ./banco.sql
+
+> Configure as credenciais em ./app/src/Config/Database.php
+
+> A partir de ./app execute `composer install && composer dump`
+
+> A partir de ./app execute `php -S 127.0.0.1:8080`
+
 ## Faça a instalação do Docker
 
 ### Passo a passo
@@ -38,13 +50,3 @@
 ### Feito isso basta abrir o browser e navegar no projeto
 
 http://127.0.0.1:8000
-
-### Caso existam desafios para executar via docker
-
-> Execute o arquivo ./initdb/init.sql em algum SGBD e banco de sua preferencia, lembre se mudar o `\c postgres` para o nome de seu banco.
-
-> Configure as credenciais em ./app/src/Config/Database.php
-
-> A partir de ./app execute `composer install && composer dump`
-
-> A partir de ./app execute `php -S 127.0.0.1:8080`
