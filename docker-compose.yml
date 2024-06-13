@@ -1,0 +1,61 @@
+services:
+  php80:
+    build: "."
+    image: "php:8.1-apache"
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./app:/var/www/html"
+      - "./apache2.conf:/etc/apache2/apache2.conf"
+      - "./sites-available:/etc/apache2/sites-available"
+      - "./sites-enabled:/etc/apache2/sites-enabled"
+      - "./ports.conf:/etc/apache2/ports.conf"
+      - "./php.ini:/usr/local/etc/php/php.ini"
+      - "./evasive.conf:/etc/apache2/mods-enabled/evasive.conf"
+      - "./mpm_worker.conf:/etc/apache2/mods-available/mpm_worker.conf"
+      - "./mpm_prefork.conf:/etc/apache2/mods-available/mpm_prefork.conf"
+    restart: "always"
+    networks:
+      default:
+        ipv4_address: 172.20.0.80
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-1234}
+      POSTGRES_DB: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - ./postgres:/data/postgres
+      - ./initdb:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    networks:
+      default:
+        ipv4_address: 172.20.0.81
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9000:8080
+    networks:
+      default:
+        ipv4_address: 172.20.0.82
+
+  redis:
+    image: redis
+    command: redis-server --requirepass 1234 --appendonly yes
+    hostname: redis
+    ports:
+      - "6379:6379"
+    networks:
+      default:
+        ipv4_address: 172.20.0.8
+
+networks:
+  default:
+    external:
+      name: soft-test

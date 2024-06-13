@@ -1,0 +1,14 @@
+{
+    "name": "soft/app",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Guilherme Mendes",
+            "email": "guilherme8787@gmail.com"
+        }
+    ]
+}
